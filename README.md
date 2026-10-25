@@ -1,5 +1,12 @@
 # Medivya: Medical-Chatbot
 
+## Home Page
+<img width="1920" height="998" alt="image" src="https://github.com/user-attachments/assets/dd660045-0ddd-4646-b532-4218f4a5da18" />
+
+## Medivya responding to user medical queries
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/51539686-e2fe-49be-a8df-2352a4c3b58d" />
+
+
 # How to run?
 ### STEPS:
 
