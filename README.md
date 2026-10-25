@@ -59,7 +59,7 @@ The application includes a document-indexing workflow that stores embeddings in 
 </p>
 
 ## 🛠️ Tech Stack
-Technology	Purpose
+
 | Technology | Purpose |
 |------------|---------|
 | Python 3.10 | Core programming language |
