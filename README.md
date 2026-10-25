@@ -1,4 +1,4 @@
-🩺 Medivya — Medical Chatbot
+# 🩺 **Medivya — Medical Chatbot**
 
 <p align="center">
 <strong>An AI-powered medical chatbot for conversational healthcare information.</strong>
