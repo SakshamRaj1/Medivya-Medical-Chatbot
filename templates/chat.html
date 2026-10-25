@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+{% block title %}Chat{% endblock %}
+
+{% block content %}
+{% macro message(m) %}
+	{% if m.role == 'user' %}
+	<div class="msg msg-user">
+		<div class="avatar" aria-hidden="true">You</div>
+		<div class="msg-body">
+			<div class="bubble">{{ m.text }}</div>
+			<div class="msg-meta"><span>{{ m.time }}</span></div>
+		</div>
+	</div>
+	{% else %}
+	<div class="msg msg-bot">
+		<img class="avatar avatar-logo" src="{{ url_for('static', filename='logo.png') }}" alt="" width="32" height="32">
+		<div class="msg-body">
+			<div class="bubble{% if m.error %} is-error{% endif %}">{{ m.text | answer }}</div>
+			<div class="msg-meta"><span>{{ m.time }}</span></div>
+		</div>
+	</div>
+	{% endif %}
+{% endmacro %}
+
+<main class="view is-active">
+	<div class="thread" role="log" aria-live="polite">
+		<div class="thread-inner">
+
+			{% if not messages %}
+			<section class="welcome">
+				<h2>How can I help with your health question?</h2>
+				<p>Answers are drawn from a collection of medical reference documents. Describe a symptom, condition or treatment in your own words.</p>
+				<div class="suggestions">
+					{% for title, hint, question in suggestions %}
+					<form method="post" action="{{ url_for('ask') }}">
+						<button class="suggestion" type="submit" name="msg" value="{{ question }}">
+							{{ title }}
+							<small>{{ hint }}</small>
+						</button>
+					</form>
+					{% endfor %}
+				</div>
+			</section>
+			{% endif %}
+
+			{% for m in messages %}{{ message(m) }}{% endfor %}
+
+
+		</div>
+	</div>
+
+	<form class="composer" id="chat-form" method="post" action="{{ url_for('ask') }}" data-logo="{{ url_for('static', filename='logo.png') }}">
+		<div class="composer-box">
+			<label for="text" class="sr-only">Your message</label>
+			<input type="text" id="text" name="msg" maxlength="1000" autocomplete="off" required
+				placeholder="Ask a medical question…" autofocus>
+			<button class="send-btn" id="send" type="submit" aria-label="Send message">
+				<svg class="icon"><use href="#i-send"/></svg>
+			</button>
+		</div>
+		<p class="composer-hint">Press Enter to send. Medivya can make mistakes; check important information with a clinician.</p>
+	</form>
+</main>
+
+
+<script>
+/* Optional enhancement. Without JavaScript the forms still work as normal
+   Flask POSTs. With it, your question appears at once and the page waits
+   for the answer in the background. app.py is not touched. */
+(function () {
+	"use strict";
+	if (!window.fetch || !window.DOMParser) return;
+
+	var composer = document.getElementById("chat-form");
+	var inner = document.querySelector(".thread-inner");
+	var input = document.getElementById("text");
+	var sendBtn = document.getElementById("send");
+	var logo = composer.dataset.logo;
+	var busy = false;
+
+	function time() {
+		return new Date().toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
+	}
+
+	function addUser(text) {
+		var row = document.createElement("div");
+		row.className = "msg msg-user";
+		row.innerHTML =
+			'<div class="avatar" aria-hidden="true">You</div>' +
+			'<div class="msg-body"><div class="bubble"></div>' +
+			'<div class="msg-meta"><span></span></div></div>';
+		row.querySelector(".bubble").textContent = text;   // textContent: no HTML injection
+		row.querySelector(".msg-meta span").textContent = time();
+		inner.appendChild(row);
+	}
+
+	function addBot(html, isError) {
+		var row = document.createElement("div");
+		row.className = "msg msg-bot";
+		row.innerHTML =
+			'<img class="avatar avatar-logo" alt="" width="32" height="32">' +
+			'<div class="msg-body"><div class="bubble">' + html + '</div></div>';
+		row.querySelector("img").src = logo;
+		if (isError) row.querySelector(".bubble").classList.add("is-error");
+		inner.appendChild(row);
+		return row;
+	}
+
+	function setBusy(on) {
+		busy = on;
+		sendBtn.disabled = on;
+		input.placeholder = on ? "Medivya is answering\u2026" : "Ask a medical question\u2026";
+	}
+
+	function send(msg, askUrl) {
+		var welcome = document.querySelector(".welcome");
+		if (welcome) welcome.remove();
+
+		addUser(msg);
+		var typing = addBot('<span class="typing" role="status" aria-label="Medivya is typing"><span></span><span></span><span></span></span>');
+		input.value = "";
+		input.focus();
+		setBusy(true);
+
+		fetch(askUrl, {
+			method: "POST",
+			credentials: "same-origin",
+			headers: { "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8" },
+			body: new URLSearchParams({ msg: msg })
+		})
+		.then(function (res) {
+			if (!res.ok) throw new Error("HTTP " + res.status);
+			return res.text();   // Flask redirects to "/", so this is the updated chat page
+		})
+		.then(function (html) {
+			var doc = new DOMParser().parseFromString(html, "text/html");
+			var fresh = doc.querySelector(".thread-inner");
+			if (!fresh) throw new Error("No chat in response");
+			inner.innerHTML = fresh.innerHTML;
+		})
+		.catch(function () {
+			typing.remove();
+			addBot("<p>Could not get an answer. Please try again in a moment.</p>", true);
+		})
+		.then(function () {
+			setBusy(false);
+			input.focus();
+		});
+	}
+
+	// The message box and the example-question buttons all post to /ask.
+	document.querySelectorAll('form[action$="/ask"]').forEach(function (form) {
+		form.addEventListener("submit", function (e) {
+			var field = form.elements.msg;
+			var msg = field ? field.value.trim() : "";
+			if (!msg) return;          // let the browser show its "required" message
+			e.preventDefault();
+			if (!busy) send(msg, form.action);
+		});
+	});
+})();
+</script>
+{% endblock %}

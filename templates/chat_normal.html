@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block title %}Chat{% endblock %}
+
+{% block content %}
+{% macro message(m) %}
+	{% if m.role == 'user' %}
+	<div class="msg msg-user">
+		<div class="avatar" aria-hidden="true">You</div>
+		<div class="msg-body">
+			<div class="bubble">{{ m.text }}</div>
+			<div class="msg-meta"><span>{{ m.time }}</span></div>
+		</div>
+	</div>
+	{% else %}
+	<div class="msg msg-bot">
+		<img class="avatar avatar-logo" src="{{ url_for('static', filename='logo.png') }}" alt="" width="32" height="32">
+		<div class="msg-body">
+			<div class="bubble{% if m.error %} is-error{% endif %}">{{ m.text | answer }}</div>
+			<div class="msg-meta"><span>{{ m.time }}</span></div>
+		</div>
+	</div>
+	{% endif %}
+{% endmacro %}
+
+<main class="view is-active">
+	<div class="thread" role="log" aria-live="polite">
+		<div class="thread-inner">
+
+			{% if not messages %}
+			<section class="welcome" style="margin-top: -2%;">
+				<h2>How can I help with your health question?</h2>
+				<p>Answers are drawn from a collection of medical reference documents. Describe a symptom, condition or treatment in your own words.</p>
+				<div class="suggestions">
+					{% for title, hint, question in suggestions %}
+					<form method="post" action="{{ url_for('ask') }}">
+						<button class="suggestion" type="submit" name="msg" value="{{ question }}">
+							{{ title }}
+							<small>{{ hint }}</small>
+						</button>
+					</form>
+					{% endfor %}
+				</div>
+			</section>
+			{% endif %}
+
+			{% for m in messages %}{{ message(m) }}{% endfor %}
+
+			{% if wait_for_reply %}
+			{# The page is sent to the browser up to this point, so the question
+			   and the typing dots appear straight away. Then the server waits for
+			   the model and sends the rest of the page. #}
+			<div class="msg msg-bot pending">
+				<img class="avatar avatar-logo" src="{{ url_for('static', filename='logo.png') }}" alt="" width="32" height="32">
+				<div class="msg-body">
+					<div class="bubble"><span class="typing" role="status" aria-label="Medivya is typing"><span></span><span></span><span></span></span></div>
+				</div>
+			</div>
+			{% set reply = wait_for_reply() %}
+			<style>.pending { display: none; }</style>
+			{{ message(reply) }}
+			{% endif %}
+
+		</div>
+	</div>
+
+	<form class="composer" method="post" action="{{ url_for('ask') }}">
+		<div class="composer-box">
+			<label for="text" class="sr-only">Your message</label>
+			<input type="text" id="text" name="msg" maxlength="1000" autocomplete="off" required
+				placeholder="{{ 'Medivya is answering…' if wait_for_reply else 'Ask a medical question…' }}"
+				{% if wait_for_reply %}disabled{% else %}autofocus{% endif %}>
+			<button class="send-btn" type="submit" aria-label="Send message"{% if wait_for_reply %} disabled{% endif %}>
+				<svg class="icon"><use href="#i-send"/></svg>
+			</button>
+		</div>
+		<p class="composer-hint">Press Enter to send. Medivya can make mistakes; check important information with a clinician.</p>
+	</form>
+</main>
+
+{% if wait_for_reply %}
+{# Reload the normal page once the answer is shown, so a browser refresh doesn't resend the question. #}
+<meta http-equiv="refresh" content="0;url={{ url_for('index') }}">
+{% endif %}
+{% endblock %}

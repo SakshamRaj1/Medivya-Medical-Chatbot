@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{% block title %}Medical Chatbot{% endblock %} – Medivya: Medical Chatbot</title>
+	<link rel="icon" type="image/png" href="{{ url_for('static', filename='logo.png') }}">
+	<link rel="icon" type="image/jpeg" href="{{ url_for('static', filename='Medivya.jpg') }}">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<!-- Icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+	<symbol id="i-cross" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+	<symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></symbol>
+	<symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></symbol>
+	<symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM4 21V5M9 7h6"/></symbol>
+	<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V6z"/><path d="M12 8v4M12 15h.01"/></symbol>
+	<symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+	<symbol id="i-send" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></symbol>
+</svg>
+
+<!-- Drives the mobile menu with CSS only -->
+<input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle menu">
+
+<div class="app">
+
+	<aside class="sidebar" aria-label="Sidebar">
+		<div class="brand">
+			<img class="logo" src="{{ url_for('static', filename='logo.png') }}" alt="" width="38" height="38">
+			<span class="brand-name">Medivya</span>
+		</div>
+
+		<form class="new-chat-form" method="post" action="{{ url_for('new_chat') }}">
+			<button class="new-chat" type="submit">
+				<svg class="icon"><use href="#i-cross"/></svg> New chat
+			</button>
+		</form>
+
+		<nav class="nav" aria-label="Sections">
+			<p class="nav-heading">Menu</p>
+			{% for endpoint, label, icon in [
+				('index', 'Chat', 'i-chat'),
+				('about', 'About', 'i-info'),
+				('references', 'References', 'i-book'),
+				('disclaimer', 'Disclaimer', 'i-shield')] %}
+			<a class="nav-item" href="{{ url_for(endpoint) }}"{% if request.endpoint == endpoint %} aria-current="page"{% endif %}>
+				<svg class="icon"><use href="#{{ icon }}"/></svg> {{ label }}
+			</a>
+			{% endfor %}
+		</nav>
+
+		<p class="side-note">
+			<strong>For information only.</strong>
+			This assistant does not replace a doctor. In an emergency, contact your local emergency services.
+		</p>
+		<p class="side-credit">Developed by <a href="{{ url_for('about') }}#developer">Saksham Raj</a></p>
+	</aside>
+	<label class="backdrop" for="nav-toggle"></label>
+
+	<div class="main">
+		<header class="topbar">
+			<label class="menu-btn" for="nav-toggle" aria-label="Open menu">
+				<svg class="icon"><use href="#i-menu"/></svg>
+			</label>
+			<img class="topbar-logo" src="{{ url_for('static', filename='logo.png') }}" alt="" width="30" height="30">
+			<h1 class="topbar-title">{% block heading %}Medical Chatbot{% endblock %}</h1>
+			<span class="status"><span class="status-dot"></span> Online</span>
+		</header>
+
+		{% block content %}{% endblock %}
+	</div>
+</div>
+
+</body>
+</html>

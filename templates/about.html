@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}About{% endblock %}
+{% block heading %}About{% endblock %}
+
+{% block content %}
+<section class="view is-active">
+	<div class="page"><div class="page-inner">
+		<h2>About Medivya</h2>
+		<p class="lede">A question-answering assistant that reads medical reference material before it replies.</p>
+
+		<h3>How it works</h3>
+		<ol class="steps">
+			<li>Your question is converted into an embedding and matched against a library of medical documents.</li>
+			<li>The three most relevant passages are retrieved from the Pinecone vector index.</li>
+			<li>A Gemini language model writes an answer using those passages as context.</li>
+		</ol>
+		<p>This approach is called retrieval-augmented generation (RAG). It keeps answers tied to the source documents instead of relying on the model's memory alone.</p>
+
+		<h3>What it can help with</h3>
+		<p>General explanations of conditions, symptoms, medicines and treatments, written in plain language.</p>
+
+		<h3>What it cannot do</h3>
+		<p>It cannot diagnose, prescribe, or assess an emergency. If something feels urgent, contact a doctor or emergency services.</p>
+
+		<h3>Technology</h3>
+		<p>Flask, LangChain, Hugging Face embeddings, Pinecone and Google Gemini.</p>
+
+		<h3 id="developer">Developer</h3>
+		<p>Built by <strong>Saksham Raj</strong></p>
+		<ul class="dev-links">
+			<li><a href="https://github.com/sakshamraj1" target="_blank">GitHub</a></li>
+			<li><a href="https://www.linkedin.com/in/sakshamraj1" target="_blank">LinkedIn</a></li>
+			<li><a href="mailto:sakshamraj1@gmail.com">Gmail</a></li>
+		</ul>
+	</div></div>
+</section>
+{% endblock %}
