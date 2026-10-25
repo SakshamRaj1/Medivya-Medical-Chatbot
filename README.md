@@ -84,10 +84,15 @@ flowchart LR
 
 ### **Workflow**
 Document processing: Prepare the medical documents used by the application.
+
 Embedding generation: Convert the documents into vector representations.
+
 Vector storage: Store the embeddings in Pinecone for semantic retrieval.
+
 User interaction: Accept a medical question through the web interface.
+
 Context retrieval: Retrieve relevant information from the configured vector index.
+
 Response generation: Use Gemini to generate a response based on the available context and configured prompt.
 
 The exact retrieval and generation behavior depends on the application's implementation and configuration.
@@ -223,7 +228,7 @@ If your application uses a different port, follow the URL printed in the termina
 
 ## 🎉 Medivya is now running locally!
 
-** 🔑 Environment Variables**
+🔑 **Environment Variables**
 ```
 Variable	Description
 PINECONE_API_KEY	API key for accessing Pinecone
