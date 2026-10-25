@@ -29,28 +29,36 @@ Built using Flask, LangChain, Google's Gemini API, and Pinecone, the project com
 
 The application includes a document-indexing workflow that stores embeddings in Pinecone, enabling the chatbot to retrieve relevant information from its configured knowledge base.
 
-##✨ Features
+## ✨ Features
+
 💬 Interactive chat interface — Ask medical questions in natural language.
+
 🤖 AI-generated responses — Generate answers using Google's Gemini language model.
+
 🔎 Semantic search — Retrieve relevant information using Pinecone vector search.
+
 🧠 LLM orchestration — Integrate retrieval and language-model workflows through LangChain.
+
 🌐 Web-based application — Access the chatbot through a Flask-powered interface.
+
 📚 Document indexing — Generate and store embeddings using store_index.py.
+
 🐍 Python-based development — Maintain and extend the application using a familiar Python stack.
-🖥️ Application Preview
+
+## 🖥️ Application Preview
 Home Page
 
 <p align="center">
 <img src="https://github.com/user-attachments/assets/eb4404a0-af52-436a-9dcc-0c29d7ca2f5c" alt="Medivya medical chatbot home page" width="100%" />
 </p>
 
-Medivya Responding to Medical Queries
+## Medivya Responding to Medical Queries
 
 <p align="center">
 <img src="https://github.com/user-attachments/assets/51539686-e2fe-49be-a8df-2352a4c3b58d" alt="Medivya responding to a user's medical query" width="100%" />
 </p>
 
-##🛠️ Tech Stack
+## 🛠️ Tech Stack
 Technology	Purpose
 ```
 Python 3.10	Core programming language
@@ -218,7 +226,7 @@ If your application uses a different port, follow the URL printed in the termina
 
 ## 🎉 Medivya is now running locally!
 
-**🔑 Environment Variables**
+** 🔑 Environment Variables**
 ```
 Variable	Description
 PINECONE_API_KEY	API key for accessing Pinecone
