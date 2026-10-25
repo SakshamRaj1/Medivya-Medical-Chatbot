@@ -46,13 +46,13 @@ The application includes a document-indexing workflow that stores embeddings in 
 🐍 Python-based development — Maintain and extend the application using a familiar Python stack.
 
 ## 🖥️ Application Preview
-## Home Page
+### Home Page
 
 <p align="center">
 <img src="https://github.com/user-attachments/assets/eb4404a0-af52-436a-9dcc-0c29d7ca2f5c" alt="Medivya medical chatbot home page" width="100%" />
 </p>
 
-## Medivya Responding to Medical Queries
+### Medivya Responding to Medical Queries
 
 <p align="center">
 <img src="https://github.com/user-attachments/assets/51539686-e2fe-49be-a8df-2352a4c3b58d" alt="Medivya responding to a user's medical query" width="100%" />
@@ -70,21 +70,46 @@ The application includes a document-indexing workflow that stores embeddings in 
 | Conda | Python environment management |
 | HTML, CSS, JavaScript | Web interface technologies, where applicable |
 
-## ⚙️ How It Works
+## ⚙️ How Medivya Works
 
-Medivya uses a document-indexing and question-answering workflow.
-
-mermaid
+```mermaid
 flowchart TD
-    A[Medical Documents] --> B[Document Processing]
-    B --> C[Embedding Generation]
-    C --> D[Pinecone Vector Database]
-    E[User Question] --> F[Flask Web Application]
-    F --> G[LangChain Retrieval Pipeline]
-    D --> G
-    G --> H[Google Gemini API]
-    H --> I[Response to User]
+    subgraph Indexing["📚 Knowledge Base Preparation"]
+        A["Medical Documents"]
+        B["Document Processing"]
+        C["Embedding Generation"]
+        D[("Pinecone Vector Database")]
 
+        A --> B
+        B --> C
+        C --> D
+    end
+
+    subgraph Chat["💬 User Query Processing"]
+        E["User Question"]
+        F["Flask Web Application"]
+        G["LangChain Retrieval Pipeline"]
+        H["Google Gemini API"]
+        I["Response to User"]
+
+        E --> F
+        F --> G
+        G --> H
+        H --> I
+    end
+
+    D -.->|"Relevant Context Retrieval"| G
+
+    classDef data fill:#E8F1FF,stroke:#2563EB,color:#1E3A8A,stroke-width:2px
+    classDef process fill:#E8F8F0,stroke:#16A34A,color:#14532D,stroke-width:1.5px
+    classDef ai fill:#F3E8FF,stroke:#9333EA,color:#581C87,stroke-width:2px
+    classDef output fill:#FFF7ED,stroke:#EA580C,color:#9A3412,stroke-width:2px
+
+    class A,D data
+    class B,C,F,G process
+    class H ai
+    class E,I output
+```
 Workflow
 Document processing: Prepare the medical documents used by the application.
 Embedding generation: Convert the documents into vector representations.
