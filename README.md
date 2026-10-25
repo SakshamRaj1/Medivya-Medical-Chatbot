@@ -62,12 +62,12 @@ The application includes a document-indexing workflow that stores embeddings in 
 Technology	Purpose
 ```
 Python 3.10	          Core programming language
-Flask	                Web application framework
+Flask	              Web application framework
 LangChain	          Language-model integration and retrieval orchestration
 Google Gemini API	  AI-generated responses
 Pinecone	          Vector database for semantic retrieval
-Conda	                Python environment management
-HTML, CSS, JavaScript	Web interface technologies, where applicable
+Conda	              Python environment management
+HTML, CSS, JavaScript Web interface technologies, where applicable
 ```
 
 ## ⚙️ How It Works
