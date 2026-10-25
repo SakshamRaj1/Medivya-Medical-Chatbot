@@ -46,7 +46,7 @@ The application includes a document-indexing workflow that stores embeddings in 
 🐍 Python-based development — Maintain and extend the application using a familiar Python stack.
 
 ## 🖥️ Application Preview
-Home Page
+## Home Page
 
 <p align="center">
 <img src="https://github.com/user-attachments/assets/eb4404a0-af52-436a-9dcc-0c29d7ca2f5c" alt="Medivya medical chatbot home page" width="100%" />
