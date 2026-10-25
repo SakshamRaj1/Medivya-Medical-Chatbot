@@ -62,7 +62,7 @@ open up localhost:
 
 - Python
 - LangChain
-- GPT
+- Gemini
 - Pinecone
 - Flask
 
