@@ -73,44 +73,16 @@ The application includes a document-indexing workflow that stores embeddings in 
 ## ⚙️ How Medivya Works
 
 ```mermaid
-flowchart TD
-    subgraph Indexing["📚 Knowledge Base Preparation"]
-        A["Medical Documents"]
-        B["Document Processing"]
-        C["Embedding Generation"]
-        D[("Pinecone Vector Database")]
-
-        A --> B
-        B --> C
-        C --> D
-    end
-
-    subgraph Chat["💬 User Query Processing"]
-        E["User Question"]
-        F["Flask Web Application"]
-        G["LangChain Retrieval Pipeline"]
-        H["Google Gemini API"]
-        I["Response to User"]
-
-        E --> F
-        F --> G
-        G --> H
-        H --> I
-    end
-
-    D -.->|"Relevant Context Retrieval"| G
-
-    classDef data fill:#E8F1FF,stroke:#2563EB,color:#1E3A8A,stroke-width:2px
-    classDef process fill:#E8F8F0,stroke:#16A34A,color:#14532D,stroke-width:1.5px
-    classDef ai fill:#F3E8FF,stroke:#9333EA,color:#581C87,stroke-width:2px
-    classDef output fill:#FFF7ED,stroke:#EA580C,color:#9A3412,stroke-width:2px
-
-    class A,D data
-    class B,C,F,G process
-    class H ai
-    class E,I output
+flowchart LR
+    A[Medical Documents] --> B[Embeddings]
+    B --> C[(Pinecone)]
+    D[User Question] --> E[Flask + LangChain]
+    C -. Context .-> E
+    E --> F[Gemini API]
+    F --> G[Response]
 ```
-Workflow
+
+### **Workflow**
 Document processing: Prepare the medical documents used by the application.
 Embedding generation: Convert the documents into vector representations.
 Vector storage: Store the embeddings in Pinecone for semantic retrieval.
