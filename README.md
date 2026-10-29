@@ -31,19 +31,19 @@ The application includes a document-indexing workflow that stores embeddings in 
 
 ## ✨ Features
 
-💬 Interactive chat interface — Ask medical questions in natural language.
+💬 Interactive chat interface - Ask medical questions in natural language.
 
-🤖 AI-generated responses — Generate answers using Google's Gemini language model.
+🤖 AI-generated responses - Generate answers using Google's Gemini language model.
 
-🔎 Semantic search — Retrieve relevant information using Pinecone vector search.
+🔎 Semantic search - Retrieve relevant information using Pinecone vector search.
 
-🧠 LLM orchestration — Integrate retrieval and language-model workflows through LangChain.
+🧠 LLM orchestration - Integrate retrieval and language-model workflows through LangChain.
 
-🌐 Web-based application — Access the chatbot through a Flask-powered interface.
+🌐 Web-based application - Access the chatbot through a Flask-powered interface.
 
-📚 Document indexing — Generate and store embeddings using store_index.py.
+📚 Document indexing - Generate and store embeddings using store_index.py.
 
-🐍 Python-based development — Maintain and extend the application using a familiar Python stack.
+🐍 Python-based development - Maintain and extend the application using a familiar Python stack.
 
 ## 🖥️ Application Preview
 ### Home Page
@@ -336,7 +336,7 @@ Saksham Raj
 
 GitHub: @SakshamRaj1
 
-Repository: Medivya — Medical Chatbot
+Repository: Medivya - Medical Chatbot
 
 📄 License
 
@@ -345,7 +345,7 @@ Check the repository for a LICENSE file to determine the applicable terms for us
 If no license is present, consider adding one before inviting others to reuse or redistribute the code.
 
 <p align="center">
-<strong>Medivya — Exploring AI-powered medical information.</strong>
+<strong>Medivya - Exploring AI-powered medical information.</strong>
 <br />
 <sub>Built with Python, LangChain, Gemini, Pinecone, and Flask.</sub>
 </p>
