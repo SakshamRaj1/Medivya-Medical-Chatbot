@@ -110,8 +110,9 @@ Anaconda or Miniconda
 Python 3.10
 A Google Gemini API key
 A Pinecone account and API key
-Step 1: Clone the Repository
 ```
+Step 1: Clone the Repository
+
 Open your terminal and execute:
 ```
 bash
