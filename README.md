@@ -339,12 +339,6 @@ GitHub: @SakshamRaj1
 
 Repository: Medivya - Medical Chatbot
 
-📄 License
-
-Check the repository for a LICENSE file to determine the applicable terms for using, modifying, or distributing this project.
-
-If no license is present, consider adding one before inviting others to reuse or redistribute the code.
-
 <p align="center">
 <strong>Medivya - Exploring AI-powered medical information.</strong>
 <br />
