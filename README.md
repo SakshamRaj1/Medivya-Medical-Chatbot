@@ -15,10 +15,10 @@ Built with Python, Flask, LangChain, Gemini, and Pinecone.
 </p>
 
 <p align="center">
-<a href="https://github.com/SakshamRaj1/Medivya-Medical-Chatbot">📂 Repository</a> ·
-<a href="#-getting-started">🚀 Getting Started</a> ·
-<a href="#-how-it-works">⚙️ How It Works</a> ·
-<a href="#-disclaimer">⚠️ Disclaimer</a>
+📂 <a href="https://github.com/SakshamRaj1/Medivya-Medical-Chatbot">Repository</a> ·
+🚀 <a href="#-getting-started">Getting Started</a> ·
+⚙️ <a href="#-how-it-works">How It Works</a> ·
+⚠️ <a href="#-disclaimer">Disclaimer</a>
 </p>
 
 ## 📖 About the Project
