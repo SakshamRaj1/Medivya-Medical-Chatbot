@@ -83,19 +83,13 @@ flowchart LR
 ```
 
 ### **Workflow**
-Document processing: Prepare the medical documents used by the application.
-
-Embedding generation: Convert the documents into vector representations.
-
-Vector storage: Store the embeddings in Pinecone for semantic retrieval.
-
-User interaction: Accept a medical question through the web interface.
-
-Context retrieval: Retrieve relevant information from the configured vector index.
-
-Response generation: Use Gemini to generate a response based on the available context and configured prompt.
-
-The exact retrieval and generation behavior depends on the application's implementation and configuration.
+- Document processing: Prepare the medical documents used by the application.
+- Embedding generation: Convert the documents into vector representations.
+- Vector storage: Store the embeddings in Pinecone for semantic retrieval.
+- User interaction: Accept a medical question through the web interface.
+- Context retrieval: Retrieve relevant information from the configured vector index.
+- Response generation: Use Gemini to generate a response based on the available context and configured prompt.
+- The exact retrieval and generation behavior depends on the application's implementation and configuration.
 
 ## 🚀 Getting Started
 
@@ -283,12 +277,12 @@ Use appropriate authentication, access controls, and HTTPS before exposing the a
 
 Potential enhancements for the project include:
 
-Displaying references or sources for retrieved medical information.
-Improving error handling and input validation.
-Adding automated tests for the retrieval pipeline and Flask routes.
-Evaluating response accuracy against a curated medical question dataset.
-Adding request logging and monitoring without collecting unnecessary sensitive information.
-Implementing rate limiting and authentication for public deployments.
+- Displaying references or sources for retrieved medical information.
+- Improving error handling and input validation.
+- Adding automated tests for the retrieval pipeline and Flask routes.
+- Evaluating response accuracy against a curated medical question dataset.
+- Adding request logging and monitoring without collecting unnecessary sensitive information.
+- Implementing rate limiting and authentication for public deployments.
 
 These are suggested future enhancements, not claims about existing functionality.
 
@@ -324,10 +318,10 @@ Medivya is an educational AI project and is not a substitute for professional me
 
 AI-generated medical information may be incomplete, inaccurate, outdated, or inappropriate for an individual's circumstances.
 
-Consult a qualified healthcare professional for personal medical concerns.
-Do not use chatbot responses as the sole basis for medical decisions.
-In an emergency, contact local emergency services or seek immediate medical attention.
-Do not delay professional evaluation or treatment based on a chatbot response.
+- Consult a qualified healthcare professional for personal medical concerns.
+- Do not use chatbot responses as the sole basis for medical decisions.
+- In an emergency, contact local emergency services or seek immediate medical attention.
+- Do not delay professional evaluation or treatment based on a chatbot response.
 
 The application does not guarantee clinical accuracy and should not be considered a clinically validated medical device.
 
